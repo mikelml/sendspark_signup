@@ -1,15 +1,19 @@
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import "./App.css";
-import { TextField, Button } from "@mui/material";
+import { Button } from "@mui/material";
+import FormInput from "./components/FormInput";
 
 function App() {
   const initialValues = {
-    name: "",
+    firstName: "",
+    lastName: "",
+    jobTitle: "",
+    company: "",
   };
 
   const validationSchema = Yup.object({
-    name: Yup.string()
+    firstName: Yup.string()
       .required("Required")
       .max(120, "Must be 120 characters or less"),
   });
@@ -25,19 +29,23 @@ function App() {
   return (
     <>
       <form onSubmit={formik.handleSubmit}>
-        <div className="form-group">
-          <TextField
-            fullWidth
-            id="name"
-            name="name"
-            label="Name"
-            onChange={formik.handleChange}
-            value={formik.values.name}
-            error={formik.touched.name && Boolean(formik.errors.name)}
-            helperText={formik.touched.name && formik.errors.name}
-          />
-          {formik.errors.name ? <div>{formik.errors.name}</div> : null}
-        </div>
+        <FormInput
+          formik={formik}
+          name="firstName"
+          label="First Name"
+        ></FormInput>
+        <FormInput
+          formik={formik}
+          name="lastName"
+          label="Last Name"
+        ></FormInput>
+        <FormInput formik={formik} name="company" label="Company"></FormInput>
+        <FormInput
+          formik={formik}
+          name="jobTitle"
+          label="Job Title"
+        ></FormInput>
+
         <div className="form-group">
           <Button
             color="primary"

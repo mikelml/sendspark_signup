@@ -4,7 +4,7 @@ import "./App.css";
 import { Button } from "@mui/material";
 import FormInput from "./components/FormInput";
 import formValidationSchema from "./validations";
-import { axios } from "axios";
+import axios from "axios";
 function App() {
   const initialValues = {
     firstName: "",
@@ -20,17 +20,15 @@ function App() {
   const formik = useFormik({
     initialValues: initialValues,
     validationSchema: validationSchema,
-    onSubmit: async (values) => {
+    onSubmit: async (values, actions) => {
       console.log(JSON.stringify(values, null, 2));
-      try {
-        const response = await axios.post(
-          "http://localhost:3000/register",
-          values
-        );
-        console.log(response.data);
-      } catch (error) {
-        console.error("Error al registrar usuario:", error.response.data);
-      }
+
+      const response = await axios.post(
+        "http://localhost:3000/register",
+        values,
+        actions
+      );
+      console.log(response.data);
     },
   });
 

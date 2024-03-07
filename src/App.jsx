@@ -22,13 +22,16 @@ function App() {
     validationSchema: validationSchema,
     onSubmit: async (values, actions) => {
       console.log(JSON.stringify(values, null, 2));
-
-      const response = await axios.post(
-        "http://localhost:3000/register",
-        values,
-        actions
-      );
-      console.log(response.data);
+      try {
+        const response = await axios.post(
+          "http://localhost:3000/register",
+          values,
+          actions
+        );
+        console.log(response.data);
+      } catch (error) {
+        console.error("Error al registrar usuario:", error.response.data);
+      }
     },
   });
 

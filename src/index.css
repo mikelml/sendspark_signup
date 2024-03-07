@@ -19,5 +19,9 @@ body {
 .form-group {
   display: flex;
   flex-direction: row;
-  margin: 25px;
+}
+
+.input-form {
+  width: 100%;
+  margin: 10px;
 }

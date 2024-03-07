@@ -32,11 +32,12 @@ app.post('/register', [
     body('password').isLength({ min: 8 })
 ], (req, res) => {
     const errors = validationResult(req);
+    
     if (!errors.isEmpty()) {
         return res.status(400).json({ errors: errors.array() });
     }
 
-    res.status(201).json({ message: 'Usuario creado exitosamente' });
+    res.status(201).json({ data: req.body, message: 'Usuario creado exitosamente' });
 });
 
 

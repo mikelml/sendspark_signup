@@ -7,6 +7,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 function Signup() {
   const navigate = useNavigate();
+  const baseURL = "http://localhost:3000";
 
   const initialValues = {
     firstName: "",
@@ -26,7 +27,7 @@ function Signup() {
       console.log(JSON.stringify(values, null, 2));
       try {
         const response = await axios.post(
-          "http://localhost:3000/register",
+          `${baseURL}/register`,
           values,
           actions
         );

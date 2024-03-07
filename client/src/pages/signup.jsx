@@ -7,7 +7,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 function Signup() {
   const navigate = useNavigate();
-  const baseURL = "https://sendspark-signup-rho.vercel.app";
+  const baseURL = "https://sendspark-signup-6fxg.vercel.app";
 
   const initialValues = {
     firstName: "",

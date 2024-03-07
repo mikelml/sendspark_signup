@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { TextField } from "@mui/material";
 
 const FormInput = ({ formik, name, label, type }) => {

@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 const express = require('express');
 const { body, validationResult } = require('express-validator');
 const axios = require('axios');

@@ -42,7 +42,7 @@ function Signup() {
     <>
       <div>
         <h1>Nice to meet you!</h1>
-        <h4>We´re excited to have you aboard!</h4>
+        <span>We´re excited to have you aboard!</span>
       </div>
       <form onSubmit={formik.handleSubmit}>
         <div className="form-group">

@@ -23,14 +23,15 @@ function Signup() {
   const formik = useFormik({
     initialValues: initialValues,
     validationSchema: validationSchema,
-    onSubmit: async (values, actions) => {
+    onSubmit: async (values) => {
       console.log(JSON.stringify(values, null, 2));
       try {
-        const response = await axios.post(
-          `${baseURL}/register`,
-          values,
-          actions
-        );
+        const response = await axios.post(`${baseURL}/register`, values, {
+          headers: {
+            "x-apikey": "API_KEY",
+          },
+          responseType: "json",
+        });
 
         navigate(`/dashboard/${response.data.data.firstName}`);
       } catch (error) {

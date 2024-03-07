@@ -4,6 +4,16 @@ const axios = require('axios');
 
 const router = express.Router();
 
+router.get('/', async (req, res) => {
+    try {
+        res.json({
+            test: 'test'
+        });
+    } catch (error) {
+        res.status(500).json({ error: 'Error al obtener los datos' });
+    }
+});
+
 router.get('/api/data', async (req, res) => {
     try {
         const response = await axios.get('https://pokeapi.co/api/v2/pokemon/ditto');

@@ -1,35 +1,57 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import "./App.css";
+import { TextField, Button } from "@mui/material";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const initialValues = {
+    name: "",
+  };
+
+  const validationSchema = Yup.object({
+    name: Yup.string()
+      .required("Required")
+      .max(120, "Must be 120 characters or less"),
+  });
+
+  const formik = useFormik({
+    initialValues: initialValues,
+    validationSchema: validationSchema,
+    onSubmit: (values) => {
+      console.log(JSON.stringify(values, null, 2));
+    },
+  });
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <form onSubmit={formik.handleSubmit}>
+        <div className="form-group">
+          <TextField
+            fullWidth
+            id="name"
+            name="name"
+            label="Name"
+            onChange={formik.handleChange}
+            value={formik.values.name}
+            error={formik.touched.name && Boolean(formik.errors.name)}
+            helperText={formik.touched.name && formik.errors.name}
+          />
+          {formik.errors.name ? <div>{formik.errors.name}</div> : null}
+        </div>
+        <div className="form-group">
+          <Button
+            color="primary"
+            fullWidth
+            text="Submit"
+            type="submit"
+            variant="contained"
+          >
+            Submit
+          </Button>
+        </div>
+      </form>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

@@ -54,7 +54,7 @@ function App() {
             type="submit"
             variant="contained"
           >
-            Submit
+            Continue
           </Button>
         </div>
       </form>

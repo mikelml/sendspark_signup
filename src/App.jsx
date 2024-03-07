@@ -4,6 +4,7 @@ import "./App.css";
 import { Button } from "@mui/material";
 import FormInput from "./components/FormInput";
 import formValidationSchema from "./validations";
+import { axios } from "axios";
 function App() {
   const initialValues = {
     firstName: "",
@@ -21,6 +22,15 @@ function App() {
     validationSchema: validationSchema,
     onSubmit: async (values) => {
       console.log(JSON.stringify(values, null, 2));
+      try {
+        const response = await axios.post(
+          "http://localhost:3000/register",
+          values
+        );
+        console.log(response.data);
+      } catch (error) {
+        console.error("Error al registrar usuario:", error.response.data);
+      }
     },
   });
 

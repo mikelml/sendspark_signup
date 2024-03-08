@@ -3,19 +3,7 @@ const { body } = require('express-validator');
 const axios = require('axios');
 const router = express.Router();
 const signupScheme = require('../validations/signUpScheme')
-
-const validate = (schema) => async (req, res, next) => {
-    try {
-        await schema.validate({
-            body: req.body,
-            query: req.query,
-            params: req.params,
-        });
-        return next();
-    } catch (err) {
-        return res.status(500).json({ type: err.name, message: err.message });
-    }
-};
+const validate = require('../middleware/schemeValidate')
 
 router.get('/', async (req, res) => {
     try {

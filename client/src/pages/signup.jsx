@@ -33,7 +33,7 @@ function Signup() {
           responseType: "json",
         });
 
-        navigate(`/dashboard/${response.data.data.firstName}`);
+        navigate(`/dashboard/${response.data.body.firstName}`);
       } catch (error) {
         console.error(
           "Error al registrar usuario:",

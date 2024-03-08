@@ -7,7 +7,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 function Signup() {
   const navigate = useNavigate();
-  const baseURL = "https://sendspark-signup-6fxg.vercel.app";
+  const baseURL = "http://localhost:3000";
 
   const initialValues = {
     firstName: "",
@@ -35,7 +35,10 @@ function Signup() {
 
         navigate(`/dashboard/${response.data.data.firstName}`);
       } catch (error) {
-        console.error("Error al registrar usuario:", error.response.data);
+        console.error(
+          "Error al registrar usuario:",
+          error.response.data.message
+        );
       }
     },
   });

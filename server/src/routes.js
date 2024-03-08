@@ -1,8 +1,21 @@
 const express = require('express');
-const { body, validationResult } = require('express-validator');
+const { body } = require('express-validator');
 const axios = require('axios');
-
 const router = express.Router();
+const signupScheme = require('../validations/signUpScheme')
+
+const validate = (schema) => async (req, res, next) => {
+    try {
+        await schema.validate({
+            body: req.body,
+            query: req.query,
+            params: req.params,
+        });
+        return next();
+    } catch (err) {
+        return res.status(500).json({ type: err.name, message: err.message });
+    }
+};
 
 router.get('/', async (req, res) => {
     try {
@@ -23,21 +36,8 @@ router.get('/api/data', async (req, res) => {
     }
 });
 
-router.post('/register', [
-    body('firstName').notEmpty(),
-    body('lastName').notEmpty(),
-    body('company').notEmpty(),
-    body('jobTitle').notEmpty(),
-    body('email').isEmail(),
-    body('password').isLength({ min: 8 })
-], (req, res) => {
-    const errors = validationResult(req);
-
-    if (!errors.isEmpty()) {
-        return res.status(400).json({ errors: errors.array() });
-    }
-
-    res.status(201).json({ data: req.body, message: 'Usuario creado exitosamente' });
+router.post('/register', validate(signupScheme), (req, res) => {
+    return res.json({ body: req.body });
 });
 
 module.exports = router
